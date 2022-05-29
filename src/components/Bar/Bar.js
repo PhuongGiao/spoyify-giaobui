@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Bar.scss";
 import {
   HeartOutlined,
@@ -7,15 +7,22 @@ import {
   DoubleRightOutlined,
   CaretRightOutlined,
 } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import { PLAY_SONG } from "../../Reducers/Types/PlaySong";
 
-const Bar = ({ choices }) => {
-  const song = {
-    title: "1904",
-    artist: "The Tallest Man on Earth",
-    year: "2012",
-    web_url: "http://www.songnotes.cc/songs/78-the-tallest-man-on-earth-1904",
-    img_url: "https://picsum.photos/130",
-  };
+const Bar = ({ song }) => {
+  const dispatch = useDispatch();
+  // const { song } = useSelector((state) => state.playSongReducer);
+
+  // const song = {
+  //   title: "1904",
+  //   artist: "The Tallest Man on Earth",
+  //   year: "2012",
+  //   web_url: "http://www.songnotes.cc/songs/78-the-tallest-man-on-earth-1904",
+  //   img_url: "https://picsum.photos/130",
+  // };
   const [isPlaying, setIsPlaying] = useState(true);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -24,12 +31,11 @@ const Bar = ({ choices }) => {
   const progressBar = useRef();
   const animation = useRef();
 
-  useEffect(() => {
-    console.log(ref.current.currentTime);
-    const seconds = Math.floor(ref.current.duration);
-    setDuration(seconds);
-    progressBar.current.max = seconds;
-  }, [ref?.current?.loadedmetadata, ref?.current?.readyState]);
+  // useEffect(() => {
+  //   const seconds = Math.floor(ref.current.duration);
+  //   setDuration(seconds);
+  //   progressBar.current.max = seconds;
+  // }, [ref?.current?.loadedmetadata, ref?.current?.readyState]);
 
   const handleClick = () => {
     setIsPlaying(!isPlaying);
@@ -81,15 +87,24 @@ const Bar = ({ choices }) => {
       <div className="botBox">
         <div className="inforSong">
           <div>
-            <img src={song.img_url} alt="" />
+            <img src={song?.links?.images[0].url} alt="" />
           </div>
           <div className="name">
-            <h4>{song.title}</h4>
-            <p>{song.artist}</p>
+            <h4>{song?.name}</h4>
+            <p>{song?.author}</p>
           </div>
           <HeartOutlined />
         </div>
-        <div className="audioPlayer">
+        <AudioPlayer
+          className="audioPlayer"
+          src={song.url}
+          layout="stacked-reverse"
+          showSkipControls={true}
+          showJumpControls={false}
+          onClickNext={() => dispatch({ type: PLAY_SONG, id: song.id + 1 })}
+          onClickPrevious={() => dispatch({ type: PLAY_SONG, id: song.id - 1 })}
+        />
+        {/* <div className="audioPlayer">
           <div className="music">
             <button onClick={() => skip("back")}>
               <DoubleLeftOutlined />
@@ -100,11 +115,7 @@ const Bar = ({ choices }) => {
             <button onClick={() => skip("fwd")}>
               <DoubleRightOutlined />
             </button>
-            <audio
-              ref={ref}
-              src="https://f9-stream.nixcdn.com/NhacCuaTui1026/YeuEmHonMoiNgay-Andiez-7136374.mp3?st=tYsaFm82EuLPtQE1AGFLyw&e=1653805345&t=1653720851964"
-              preload="metadata"
-            ></audio>
+            <audio ref={ref} src={song?.url} preload="metadata"></audio>
             <div style={{ display: "flex" }}>
               <p>{calculateTime(currentTime)}</p>
               <input
@@ -121,10 +132,10 @@ const Bar = ({ choices }) => {
         <div className="vol">
           <img
             className="image"
-            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
-            alt=""
+            src={song?.links?.images[0].url}
+            alt={song?.name}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

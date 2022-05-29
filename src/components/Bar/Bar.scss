@@ -1,5 +1,6 @@
 .Bar {
   position: fixed;
+  z-index: 300;
   width: 100%;
   bottom: 0;
   display: flex;
@@ -41,8 +42,7 @@
       }
     }
     .audioPlayer {
-      width: 30%;
-      text-align: center;
+      background: #131212;
       .music {
         width: 80%;
         button {

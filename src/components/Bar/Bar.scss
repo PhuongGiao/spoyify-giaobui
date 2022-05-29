@@ -1,0 +1,80 @@
+.Bar {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  color: white;
+  padding: 15px;
+  background-color: rgb(19, 18, 18);
+  .botBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    .inforSong {
+      width: 30%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      line-height: 0;
+      div {
+        width: 15%;
+        img {
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+      .name {
+        width: fit-content;
+        margin: 0 20px;
+        // line-height: 0;
+      }
+      span {
+        cursor: pointer;
+        transition: all 0.5s;
+        font-size: 120%;
+        color: white;
+        &:hover {
+          color: grey;
+        }
+      }
+    }
+    .audioPlayer {
+      width: 30%;
+      text-align: center;
+      .music {
+        width: 80%;
+        button {
+          background: none;
+          color: white;
+          border: 0;
+          margin: 10px 20px;
+          font-size: 110%;
+        }
+        .progressBar {
+          appearance: none;
+          background: rgb(165, 165, 165);
+          border-radius: 10px;
+          position: relative;
+          width: 100%;
+          height: 11px;
+          outline: none;
+          color: black;
+        }
+      }
+    }
+    .vol {
+      display: flex;
+      justify-content: flex-end;
+      width: 30%;
+      .image {
+        width: 20%;
+        margin-right: 20px;
+        img {
+          width: 20%;
+        }
+      }
+    }
+  }
+}

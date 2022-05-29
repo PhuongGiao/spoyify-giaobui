@@ -1,0 +1,17 @@
+.Header {
+  background: rgb(24, 24, 24);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  a.spe {
+    border-radius: 25px;
+    text-decoration: none;
+    border: 1px solid black;
+    color: black;
+    background: white;
+    font-weight: 700;
+    padding: 12px 30px;
+    margin: 8px 20px;
+  }
+}
